@@ -6,7 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 " add all your plugins here 
 " Plug 'monkey/bananas' is shorthand for 
 " Plug 'https://github.com/monkey/bananas'
-"
+
 " Autocomplete
 Plug 'Shougo/deoplete.nvim'
     " display function signatures
@@ -80,14 +80,15 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
+" Sets how many lines of history (i.e. typed commands) VIM has to remember
 set history=500
 
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
 
-" Set to auto read when a file is changed from the outside
+" Set to automatically reload when a file is changed from the outside (and it hasn't been
+" modified)
 set autoread
 
 " Set leader (this is the default)
@@ -128,9 +129,6 @@ set showtabline=2
 
 " Display command line’s tab complete options as a menu.
 set wildmenu
-
-" A buffer becomes hidden when it is abandoned
-" set hid
 
 " Ignore case when searching
 set ignorecase
@@ -236,15 +234,15 @@ set statusline+=\
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Use tabs instead of spaces
+" When pressing tab or indenting with >>
+" add a \t character and make it look like it takes up four spaces
 set noexpandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
 
 set autoindent "Auto indent
 filetype plugin indent on
@@ -263,20 +261,6 @@ map <S-Enter> O<ESC>
 
 " Let backspace remove indents and eols
 set backspace=indent,eol,start
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => YouCompleteMe customization
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"Makes the autocomplete window go away after completion
-"let g:ycm_autoclose_preview_window_after_completion=0
-
-"Makes the autocomplete window go away after exited insert mode
-"let g:ycm_autoclose_preview_window_after_insertion=1
-
-"Define shorcut for goto definition
-"map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Deoplete customization
@@ -318,8 +302,8 @@ nmap <leader>p <Plug>(ale_previous)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnippets"]
 
