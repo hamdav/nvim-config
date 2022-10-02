@@ -226,7 +226,9 @@ set statusline+=%{g:latex_wc} " Latex wordcount
 set statusline+=%#SepCol#%{'\ \ \ «\ '}%#Base#
 set statusline+=%#GitCol#
 set statusline+=\ 
-set statusline+=%{GitBranch(fugitive#head())}
+" The five means that if the current head is detached, display the first five
+" chars of the commit hash
+set statusline+=%{FugitiveHead(5)}
 set statusline+=\ 
 
 
