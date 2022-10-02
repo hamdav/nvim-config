@@ -1,2 +1,5 @@
 plugged
 .netrwhist
+
+# Something that plug automatically creates
+autoload/plug.vim.old
