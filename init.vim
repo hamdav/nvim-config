@@ -19,6 +19,8 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-commentary'
 " surroundings, brackets quotes etc
 Plug 'tpope/vim-surround'
+" Mark end of line whitespace
+Plug 'csexton/trailertrash.vim'
 
 " Syntax error checking. 
     " Note that ale needs external checkers
