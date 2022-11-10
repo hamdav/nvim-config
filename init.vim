@@ -200,7 +200,7 @@ augroup END
 function! GetWC()
     let l:tmp=system("texcount"." ".expand('%'))
     let l:tmp1=system("grep 'Words in text'", l:tmp)
-    let l:tmp2=system("egrep -o -e '[0-9]+'", l:tmp1)
+    let l:tmp2=system("awk '{print $4}'", l:tmp1)
     let l:tmp3=system("tr -d '\n'", l:tmp2)
     return l:tmp3
 endfunction
