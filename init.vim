@@ -21,6 +21,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 " Mark end of line whitespace
 Plug 'csexton/trailertrash.vim'
+" Smooth scroll
+Plug 'terryma/vim-smooth-scroll'
 
 " Syntax error checking. 
     " Note that ale needs external checkers
@@ -276,16 +278,6 @@ let g:deoplete#sources#jedi#show_docstring=1
 " This makes ultisnips show up higher in the list of suggestions
 call deoplete#custom#source('ultisnips', 'rank', 1000)
 
-" Use tab for completion instead of CTRL+N
-" inoremap <silent><expr> <TAB>
-"     \ pumvisible() ? "\<C-n>" :
-"     \ <SID>check_back_space() ? "\<TAB>" :
-"     \ deoplete#mappings#manual_complete()
-" function! s:check_back_space() abort "{{{
-"     let col = col('.') - 1
-"     return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Echodoc customization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -327,3 +319,11 @@ augroup END
 " Do not format on save 
 let g:autopep8_on_save = 0
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => smooth scroll customization
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 1)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 1)<CR>
