@@ -102,7 +102,7 @@ let mapleader = '\'
 set encoding=utf-8
 
 " set python provider
-let g:python3_host_prog = '~/miniconda3/bin/python'
+let g:python3_host_prog = '~/miniconda3/envs/neovim_env/bin/python3'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,24 +188,39 @@ function! GitBranch(git)
 endfunction
 
 " If file is a tex file, run texcount on save and output to statusline
-let g:latex_wc=""
-augroup latexstatus
+let g:wordcount=""
+augroup wcstatus
+	" v this thing clears all commands that was previously in this group (hopefully none)
     autocmd!
+
     " Whenever a tex file is written, Read or entered (e.g. when switching to
     " tab) count the words
-    autocmd BufWritePost,BufRead,BufEnter *.tex :let g:latex_wc=GetWC()." words"
+    autocmd BufWritePost,BufRead,BufEnter *.tex :let g:wordcount=GetTexWC()." words"
     " Whenever tex file is left, do not display a wordcount
-    autocmd BufLeave *.tex :let g:latex_wc=""
+    autocmd BufLeave *.tex :let g:wordcount=""
+
+    " Whenever a txt file is written, Read or entered (e.g. when switching to
+    " tab) count the words
+    autocmd BufWritePost,BufRead,BufEnter *.txt :let g:wordcount=GetTxtWC()." words"
+    " Whenever tex file is left, do not display a wordcount
+    autocmd BufLeave *.txt :let g:wordcount=""
 augroup END
 
 " Get the texcount wordcount for current file
-function! GetWC()
+function! GetTexWC()
     let l:tmp=system("texcount"." ".expand('%'))
     let l:tmp1=system("grep 'Words in text'", l:tmp)
     let l:tmp2=system("awk '{print $4}'", l:tmp1)
     let l:tmp3=system("tr -d '\n'", l:tmp2)
     return l:tmp3
 endfunction
+" Get the wc wordcount for current file
+function! GetTxtWC()
+    let l:tmp=system("wc -w ".expand('%')." | awk '{print $1}'")
+    let l:tmp1=system("tr -d '\n'", l:tmp)
+	return l:tmp1
+endfunction
+
 
 " Define some highlight groups to display nice colors
 hi link Base Normal
@@ -219,15 +234,15 @@ hi GitCol ctermfg=35 guifg=#00af5f
 set statusline=%#Base#
 set statusline+=%#LineNr#
 set statusline+=%3c
-set statusline+=%#SepCol#%{'\ «\ '}%#FileName#
+set statusline+=%#SepCol#%{'\ «\ '}%#FileName#
 set statusline+=%t      " Filename
 set statusline+=%1m     " Modified flag
 set statusline+=%1r     " Read-Only flag
 set statusline+=%#SepCol#%{'\ »\ \ \ '}%#Base#
 
 set statusline+=%= " Left - Right separation
-set statusline+=%{g:latex_wc} " Latex wordcount
-set statusline+=%#SepCol#%{'\ \ \ «\ '}%#Base#
+set statusline+=%{g:wordcount} " Latex wordcount
+set statusline+=%#SepCol#%{'\ \ \ «\ '}%#Base#
 set statusline+=%#GitCol#
 set statusline+=\ 
 " The five means that if the current head is detached, display the first five
