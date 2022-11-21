@@ -28,7 +28,7 @@ nmap <c-s> ms[s1z=`s
 let g:vimtex_fold_enabled = 1
 
 " Set pdf viewer
-let g:vimtex_view_method = 'skim'
+let g:vimtex_view_method = 'zathura'
 
 let g:vimtex_compiler_latexmk = {
  			\ 'options' : [
