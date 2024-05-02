@@ -28,7 +28,9 @@ nmap <c-s> ms[s1z=`s
 let g:vimtex_fold_enabled = 1
 
 " Set pdf viewer
-let g:vimtex_view_method = 'skim'
+let g:vimtex_view_general_viewer = 'SumatraPDF'
+let g:vimtex_view_general_options
+  \ = '-reuse-instance -forward-search @tex @line @pdf'
 
 let g:vimtex_compiler_latexmk = {
  			\ 'options' : [

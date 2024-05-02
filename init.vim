@@ -102,7 +102,7 @@ let mapleader = '\'
 set encoding=utf-8
 
 " set python provider
-let g:python3_host_prog = '~/miniconda3/envs/neovim_env/bin/python3'
+let g:python3_host_prog = '~/AppData/Local/miniconda3/envs/neovim/python.exe'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -195,15 +195,15 @@ augroup wcstatus
 
     " Whenever a tex file is written, Read or entered (e.g. when switching to
     " tab) count the words
-    autocmd BufWritePost,BufRead,BufEnter *.tex :let g:wordcount=GetTexWC()." words"
+    " autocmd BufWritePost,BufRead,BufEnter *.tex :let g:wordcount=GetTexWC()." words"
     " Whenever tex file is left, do not display a wordcount
-    autocmd BufLeave *.tex :let g:wordcount=""
+    " autocmd BufLeave *.tex :let g:wordcount=""
 
     " Whenever a txt file is written, Read or entered (e.g. when switching to
     " tab) count the words
-    autocmd BufWritePost,BufRead,BufEnter *.txt :let g:wordcount=GetTxtWC()." words"
+    " autocmd BufWritePost,BufRead,BufEnter *.txt :let g:wordcount=GetTxtWC()." words"
     " Whenever tex file is left, do not display a wordcount
-    autocmd BufLeave *.txt :let g:wordcount=""
+    " autocmd BufLeave *.txt :let g:wordcount=""
 augroup END
 
 " Get the texcount wordcount for current file
@@ -211,13 +211,13 @@ function! GetTexWC()
     let l:tmp=system("texcount"." ".expand('%'))
     let l:tmp1=system("grep 'Words in text'", l:tmp)
     let l:tmp2=system("awk '{print $4}'", l:tmp1)
-    let l:tmp3=system("tr -d '\n'", l:tmp2)
+    let l:tmp3=system("wsl tr -d '\n'", l:tmp2)
     return l:tmp3
 endfunction
 " Get the wc wordcount for current file
 function! GetTxtWC()
     let l:tmp=system("wc -w ".expand('%')." | awk '{print $1}'")
-    let l:tmp1=system("tr -d '\n'", l:tmp)
+    let l:tmp1=system("wsl tr -d '\n'", l:tmp)
 	return l:tmp1
 endfunction
 
