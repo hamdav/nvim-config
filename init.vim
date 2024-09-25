@@ -39,6 +39,8 @@ Plug 'tell-k/vim-autopep8'
 Plug 'vim-python/python-syntax'
     " Python deoplete completion
 Plug 'deoplete-plugins/deoplete-jedi'
+	" Python black formatting
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 
 " Haskell stuff
     " Syntax highlighting and indentation for haskell
@@ -102,7 +104,7 @@ let mapleader = '\'
 set encoding=utf-8
 
 " set python provider
-let g:python3_host_prog = '~/miniconda3/envs/neovim_env/bin/python3'
+let g:python3_host_prog = '~/qpl_base/bin/python'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
